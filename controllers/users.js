@@ -39,17 +39,18 @@ passport.use(new LocalStrategy({
 
 /////////LOGIN AUTHENTICATION ENDS
 
-exports.get_register = function(req, res, next) {
+exports.get_register = (req, res, next)=> {
     res.render('users/register');
 }
 
 exports.register = async function(req, res, next) {
-    const FirstName = req.body.FirstName
-    const Surname = req.body.Surname
-    const Number = req.body.Number
-    const Country = req.body.Country
-    const theEmail = req.body.Email
-    const thePassword = req.body.Password
+//     const FirstName = req.body.FirstName
+//     const Surname = req.body.Surname
+//     const Number = req.body.Number
+//     const Country = req.body.Country
+//     const theEmail = req.body.Email
+//     const thePassword = req.body.Password
+    const { FirstName, Surname, Number, Country, theEmail, thePassword } = req.body;
     const newPassword = await bcryptjs.hash(req.body.Password, 10)
     const { errors, valid } = signup(theEmail, thePassword);
     userData.findOne({Email: theEmail}).then(user=>{
